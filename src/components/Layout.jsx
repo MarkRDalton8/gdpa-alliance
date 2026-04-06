@@ -63,8 +63,8 @@ export default function Layout({ children }) {
     { key: "training", label: "Training", path: "/training" },
     { key: "resources", label: "Resources", path: "/resources" },
     { key: "news", label: "News", path: "/news" },
+    { key: "account", label: "My Account", path: "/account" },
   ];
-  if (isLoggedIn) navItems.push({ key: "account", label: "My Account", path: "/account" });
 
   return (
     <div style={{ fontFamily: "'Open Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif", color: COLORS.neutral, background: COLORS.neutralLight, minHeight: "100vh" }}>

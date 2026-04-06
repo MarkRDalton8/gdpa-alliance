@@ -22,19 +22,24 @@ export default function CertificationDetail() {
         </div>
 
         <div style={{ background: "white", border: `1px solid ${COLORS.border}`, borderRadius: 12, padding: 48 }}>
-          <h2 style={{ fontSize: 24, fontWeight: 700, marginBottom: 16, color: COLORS.neutral }}>Overview</h2>
-          <p style={{ fontSize: 16, color: "#666", lineHeight: 1.8, marginBottom: 32 }}>{cert.description}</p>
+          <h2 style={{ fontSize: 24, fontWeight: 700, marginBottom: 16, color: COLORS.neutral }}>Program Overview</h2>
+          <p style={{ fontSize: 16, color: "#666", lineHeight: 1.8, marginBottom: 24 }}>{cert.description}</p>
 
-          {cert.locked ? (
-            <div style={{ background: `${COLORS.primary}10`, border: `2px solid ${COLORS.primary}`, borderRadius: 8, padding: 32, textAlign: "center" }}>
-              <div style={{ fontSize: 48, marginBottom: 16 }}>🔒</div>
-              <h3 style={{ fontSize: 24, fontWeight: 700, color: COLORS.neutral, marginBottom: 12 }}>Member-Only Certification</h3>
-              <p style={{ fontSize: 16, color: "#666", marginBottom: 24 }}>This certification program is available exclusively to GDPA members.</p>
-              <button style={{ background: COLORS.primary, color: "white", border: "none", padding: "14px 32px", borderRadius: 6, fontWeight: 700, fontSize: 16, cursor: "pointer" }}>Activate Site License</button>
-            </div>
-          ) : (
-            <button style={{ background: COLORS.primary, color: "white", border: "none", padding: "12px 24px", borderRadius: 6, fontWeight: 600, fontSize: 14, cursor: "pointer" }}>Enroll Now</button>
-          )}
+          <p style={{ fontSize: 16, color: "#666", lineHeight: 1.8, marginBottom: 24 }}>
+            The certification curriculum covers 12 comprehensive modules including GDPR foundations, lawful bases for processing, data subject rights, cross-border transfers, privacy by design principles, and recent enforcement case analysis. Participants will master practical implementation strategies through real-world scenarios and interactive workshops led by practicing privacy professionals.
+          </p>
+
+          <p style={{ fontSize: 16, color: "#666", lineHeight: 1.8, marginBottom: 32 }}>
+            This globally recognized credential demonstrates your expertise to employers and clients, with 92% of certificate holders reporting career advancement within one year. The program includes access to our online learning platform, practice exams, and exclusive member forums for ongoing professional development.
+          </p>
+
+          <button style={{
+            background: COLORS.primary, color: "white", border: "none",
+            padding: "14px 32px", borderRadius: 6, fontWeight: 700,
+            fontSize: 16, cursor: "pointer", fontFamily: "'Lato', sans-serif",
+          }}>
+            View Full Curriculum & Enroll
+          </button>
         </div>
       </div>
     </Layout>

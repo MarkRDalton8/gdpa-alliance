@@ -26,20 +26,30 @@ export default function TrainingDetail() {
         </div>
 
         <div style={{ background: "white", border: `1px solid ${COLORS.border}`, borderRadius: 12, padding: 48 }}>
-          <div style={{ marginBottom: 24, padding: "12px 16px", background: COLORS.neutralLight, borderRadius: 6 }}>
-            <strong>{training.seats} seats available</strong>
+          <div style={{ marginBottom: 24, padding: "12px 16px", background: COLORS.neutralLight, borderRadius: 6, fontSize: 14, color: "#666" }}>
+            <strong style={{ color: COLORS.neutral }}>{training.seats} seats remaining</strong> • Live session with Q&A
           </div>
 
-          {training.locked ? (
-            <div style={{ background: `${COLORS.primary}10`, border: `2px solid ${COLORS.primary}`, borderRadius: 8, padding: 32, textAlign: "center" }}>
-              <div style={{ fontSize: 48, marginBottom: 16 }}>🔒</div>
-              <h3 style={{ fontSize: 24, fontWeight: 700, color: COLORS.neutral, marginBottom: 12 }}>Member-Only Training</h3>
-              <p style={{ fontSize: 16, color: "#666", marginBottom: 24 }}>This training session is available exclusively to GDPA members.</p>
-              <button style={{ background: COLORS.primary, color: "white", border: "none", padding: "14px 32px", borderRadius: 6, fontWeight: 700, fontSize: 16, cursor: "pointer" }}>Activate Site License</button>
-            </div>
-          ) : (
-            <button style={{ background: COLORS.primary, color: "white", border: "none", padding: "12px 24px", borderRadius: 6, fontWeight: 600, fontSize: 14, cursor: "pointer" }}>Register Now</button>
-          )}
+          <h2 style={{ fontSize: 24, fontWeight: 700, marginBottom: 16, color: COLORS.neutral }}>Session Overview</h2>
+          <p style={{ fontSize: 16, color: "#666", lineHeight: 1.8, marginBottom: 24 }}>
+            Join us for an expert-led deep dive into the latest GDPR enforcement trends shaping privacy compliance in 2026. This advanced session analyzes recent CJEU rulings, supervisory authority coordination patterns, and emerging violation categories that every privacy professional needs to understand.
+          </p>
+
+          <p style={{ fontSize: 16, color: "#666", lineHeight: 1.8, marginBottom: 24 }}>
+            We'll examine 15 significant enforcement actions from Q1 2026, exploring regulatory interpretation shifts around consent mechanisms, legitimate interest balancing tests, and processor-controller liability allocation. Participants will gain practical frameworks for assessing compliance risk and implementing defensive strategies based on current enforcement priorities.
+          </p>
+
+          <p style={{ fontSize: 16, color: "#666", lineHeight: 1.8, marginBottom: 32 }}>
+            The session includes live polling, case study breakouts, and dedicated Q&A time with the instructor. All registrants receive session recordings, slide decks, and a curated resource library of referenced enforcement decisions.
+          </p>
+
+          <button style={{
+            background: COLORS.primary, color: "white", border: "none",
+            padding: "14px 32px", borderRadius: 6, fontWeight: 700,
+            fontSize: 16, cursor: "pointer", fontFamily: "'Lato', sans-serif",
+          }}>
+            Register for Session
+          </button>
         </div>
       </div>
     </Layout>

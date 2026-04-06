@@ -22,18 +22,27 @@ export default function NewsDetail() {
         </div>
 
         <div style={{ background: "white", border: `1px solid ${COLORS.border}`, borderRadius: 12, padding: 48 }}>
-          <p style={{ fontSize: 18, color: "#666", lineHeight: 1.8, marginBottom: 32 }}>{article.excerpt}</p>
+          <p style={{ fontSize: 18, color: "#666", lineHeight: 1.8, marginBottom: 24 }}>{article.excerpt}</p>
 
-          {article.locked ? (
-            <div style={{ background: `${COLORS.primary}10`, border: `2px solid ${COLORS.primary}`, borderRadius: 8, padding: 32, textAlign: "center" }}>
-              <div style={{ fontSize: 48, marginBottom: 16 }}>🔒</div>
-              <h3 style={{ fontSize: 24, fontWeight: 700, color: COLORS.neutral, marginBottom: 12 }}>Member-Only Article</h3>
-              <p style={{ fontSize: 16, color: "#666", marginBottom: 24 }}>This article is available exclusively to GDPA members.</p>
-              <button style={{ background: COLORS.primary, color: "white", border: "none", padding: "14px 32px", borderRadius: 6, fontWeight: 700, fontSize: 16, cursor: "pointer" }}>Activate Site License</button>
-            </div>
-          ) : (
-            <p style={{ fontSize: 16, color: "#666", lineHeight: 1.8 }}>Full article content would appear here...</p>
-          )}
+          <p style={{ fontSize: 16, color: "#666", lineHeight: 1.8, marginBottom: 24 }}>
+            Privacy practitioners across industries are analyzing the compliance implications of the AI Act's final text, which introduces risk-based obligations for AI systems based on their potential impact on fundamental rights. High-risk AI systems face stringent requirements including human oversight, transparency obligations, and mandatory conformity assessments before deployment.
+          </p>
+
+          <p style={{ fontSize: 16, color: "#666", lineHeight: 1.8, marginBottom: 24 }}>
+            The Act's interaction with GDPR remains a focal point of discussion, particularly around automated decision-making provisions and the scope of data protection impact assessments for AI systems. Organizations deploying AI in EU markets must now navigate overlapping compliance frameworks while preparing for phased implementation deadlines beginning in early 2027.
+          </p>
+
+          <p style={{ fontSize: 16, color: "#666", lineHeight: 1.8, marginBottom: 32 }}>
+            GDPA's analysis includes expert commentary from data protection authorities, practical implementation checklists for privacy teams, and a comparison matrix showing how AI Act obligations align with existing GDPR requirements. Members can access the full technical analysis, including sample vendor questionnaires and risk assessment templates.
+          </p>
+
+          <button style={{
+            background: COLORS.primary, color: "white", border: "none",
+            padding: "14px 32px", borderRadius: 6, fontWeight: 700,
+            fontSize: 16, cursor: "pointer", fontFamily: "'Lato', sans-serif",
+          }}>
+            Read Full Analysis
+          </button>
         </div>
       </div>
     </Layout>

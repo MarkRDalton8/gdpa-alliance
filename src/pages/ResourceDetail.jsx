@@ -35,27 +35,28 @@ export default function ResourceDetail() {
         </div>
 
         <div style={{ background: "white", border: `1px solid ${COLORS.border}`, borderRadius: 12, padding: 48 }}>
-          <h2 style={{ fontSize: 24, fontWeight: 700, marginBottom: 16, color: COLORS.neutral }}>Overview</h2>
-          <p style={{ fontSize: 16, color: "#666", lineHeight: 1.8, marginBottom: 32 }}>{resource.description}</p>
+          <h2 style={{ fontSize: 24, fontWeight: 700, marginBottom: 16, color: COLORS.neutral }}>Executive Summary</h2>
+          <p style={{ fontSize: 16, color: "#666", lineHeight: 1.8, marginBottom: 24 }}>
+            {resource.description}
+          </p>
+          <p style={{ fontSize: 16, color: "#666", lineHeight: 1.8, marginBottom: 24 }}>
+            This comprehensive report examines enforcement patterns across major jurisdictions including the EU, UK, United States (FTC, state AGs, and CPPA), Canada, and APAC regions. Key findings include a 34% year-over-year increase in total penalties issued, with GDPR fines reaching €2.1 billion collectively in 2025. The report provides detailed case studies of significant enforcement actions, emerging violation patterns, and practical compliance recommendations based on regulatory trends.
+          </p>
+          <p style={{ fontSize: 16, color: "#666", lineHeight: 1.8, marginBottom: 32 }}>
+            Readers will gain actionable insights into cross-border data transfer violations, cookie consent failures, data breach notification timing issues, and the rising trend of enforcement actions targeting AI and automated decision-making systems. The appendix includes a searchable database of all 2025 enforcement actions with filterable criteria.
+          </p>
 
-          {resource.locked ? (
-            <div style={{ background: `${COLORS.primary}10`, border: `2px solid ${COLORS.primary}`, borderRadius: 8, padding: 32, textAlign: "center" }}>
-              <div style={{ fontSize: 48, marginBottom: 16 }}>🔒</div>
-              <h3 style={{ fontSize: 24, fontWeight: 700, color: COLORS.neutral, marginBottom: 12 }}>Member-Only Content</h3>
-              <p style={{ fontSize: 16, color: "#666", marginBottom: 24 }}>This resource is available exclusively to GDPA members with an active site license.</p>
-              <button style={{
-                background: COLORS.primary, color: "white", border: "none",
-                padding: "14px 32px", borderRadius: 6, fontWeight: 700,
-                fontSize: 16, cursor: "pointer",
-              }}>Activate Site License</button>
-            </div>
-          ) : (
-            <button style={{
-              background: COLORS.primary, color: "white", border: "none",
-              padding: "12px 24px", borderRadius: 6, fontWeight: 600,
-              fontSize: 14, cursor: "pointer",
-            }}>Download PDF</button>
-          )}
+          <button style={{
+            background: COLORS.primary, color: "white", border: "none",
+            padding: "14px 32px", borderRadius: 6, fontWeight: 700,
+            fontSize: 16, cursor: "pointer", fontFamily: "'Lato', sans-serif",
+            transition: "background 0.2s ease",
+          }}
+          onMouseEnter={e => e.currentTarget.style.background = COLORS.primaryDark}
+          onMouseLeave={e => e.currentTarget.style.background = COLORS.primary}
+          >
+            Download Full Report (PDF)
+          </button>
         </div>
       </div>
     </Layout>

@@ -1,0 +1,13 @@
+node_modules
+dist
+.DS_Store
+*.local
+
+# Environment variables (contains API keys/secrets)
+.env
+
+# Python
+__pycache__
+*.pyc
+upload_results.json
+.vercel

@@ -11,6 +11,32 @@ export default function CertificationDetail() {
 
   return (
     <Layout>
+      {cert.locked && (
+        <style>{`
+          .piano-container--active ~ * {
+            display: none;
+          }
+          .piano-container--active {
+            position: relative;
+          }
+          .piano-container--active::before {
+            content: "";
+            position: absolute;
+            bottom: 100%;
+            left: 0;
+            right: 0;
+            height: 200px;
+            pointer-events: none;
+            background-image: linear-gradient(
+              to top,
+              ${COLORS.neutralLight} 0%,
+              ${COLORS.neutralLight} 20%,
+              rgba(244, 244, 244, 0) 100%
+            );
+          }
+        `}</style>
+      )}
+
       <div style={{ maxWidth: 800, margin: "0 auto" }}>
         <div style={{ marginBottom: 32 }}>
           <div style={{ display: "flex", alignItems: "center", gap: 12, marginBottom: 16 }}>
@@ -29,7 +55,11 @@ export default function CertificationDetail() {
             The certification curriculum covers 12 comprehensive modules including GDPR foundations, lawful bases for processing, data subject rights, cross-border transfers, privacy by design principles, and recent enforcement case analysis. Participants will master practical implementation strategies through real-world scenarios and interactive workshops led by practicing privacy professionals.
           </p>
 
-          <p style={{ fontSize: 16, color: "#666", lineHeight: 1.8, marginBottom: 32 }}>
+          {/* Piano inline lock container */}
+          {cert.locked && <div className="piano-container"></div>}
+
+          <h2 style={{ fontSize: 24, fontWeight: 700, marginTop: 32, marginBottom: 16, color: COLORS.neutral }}>Learning Outcomes</h2>
+          <p style={{ fontSize: 16, color: "#666", lineHeight: 1.8, marginBottom: 24 }}>
             This globally recognized credential demonstrates your expertise to employers and clients, with 92% of certificate holders reporting career advancement within one year. The program includes access to our online learning platform, practice exams, and exclusive member forums for ongoing professional development.
           </p>
 

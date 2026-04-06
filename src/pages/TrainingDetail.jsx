@@ -11,6 +11,32 @@ export default function TrainingDetail() {
 
   return (
     <Layout>
+      {training.locked && (
+        <style>{`
+          .piano-container--active ~ * {
+            display: none;
+          }
+          .piano-container--active {
+            position: relative;
+          }
+          .piano-container--active::before {
+            content: "";
+            position: absolute;
+            bottom: 100%;
+            left: 0;
+            right: 0;
+            height: 200px;
+            pointer-events: none;
+            background-image: linear-gradient(
+              to top,
+              ${COLORS.neutralLight} 0%,
+              ${COLORS.neutralLight} 20%,
+              rgba(244, 244, 244, 0) 100%
+            );
+          }
+        `}</style>
+      )}
+
       <div style={{ maxWidth: 800, margin: "0 auto" }}>
         <div style={{ marginBottom: 32 }}>
           <div style={{ display: "flex", alignItems: "center", gap: 12, marginBottom: 16 }}>
@@ -39,6 +65,10 @@ export default function TrainingDetail() {
             We'll examine 15 significant enforcement actions from Q1 2026, exploring regulatory interpretation shifts around consent mechanisms, legitimate interest balancing tests, and processor-controller liability allocation. Participants will gain practical frameworks for assessing compliance risk and implementing defensive strategies based on current enforcement priorities.
           </p>
 
+          {/* Piano inline lock container */}
+          {training.locked && <div className="piano-container"></div>}
+
+          <h2 style={{ fontSize: 24, fontWeight: 700, marginTop: 32, marginBottom: 16, color: COLORS.neutral }}>What You'll Learn</h2>
           <p style={{ fontSize: 16, color: "#666", lineHeight: 1.8, marginBottom: 32 }}>
             The session includes live polling, case study breakouts, and dedicated Q&A time with the instructor. All registrants receive session recordings, slide decks, and a curated resource library of referenced enforcement decisions.
           </p>

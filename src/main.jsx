@@ -12,6 +12,7 @@ import NewsList from './pages/NewsList'
 import NewsDetail from './pages/NewsDetail'
 import AccountPage from './pages/AccountPage'
 import ApiDemo from './pages/ApiDemo'
+import MembershipPage from './pages/MembershipPage'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
@@ -26,6 +27,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
         <Route path="/resources/:slug" element={<ResourceDetail />} />
         <Route path="/news" element={<NewsList />} />
         <Route path="/news/:slug" element={<NewsDetail />} />
+        <Route path="/membership" element={<MembershipPage />} />
         <Route path="/account" element={<AccountPage />} />
         <Route path="/demo" element={<ApiDemo />} />
       </Routes>

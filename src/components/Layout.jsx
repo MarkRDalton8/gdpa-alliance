@@ -63,6 +63,7 @@ export default function Layout({ children }) {
     { key: "training", label: "Training", path: "/training" },
     { key: "resources", label: "Resources", path: "/resources" },
     { key: "news", label: "News", path: "/news" },
+    { key: "membership", label: "Membership", path: "/membership" },
     { key: "account", label: "My Account", path: "/account" },
   ];
 

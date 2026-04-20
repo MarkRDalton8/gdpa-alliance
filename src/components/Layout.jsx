@@ -18,6 +18,16 @@ export default function Layout({ children }) {
             setUserName(`${data.user.given_name || ''} ${data.user.family_name || ''}`.trim() || data.user.email);
             setUserEmail(data.user.email);
           }]);
+          window.tp.push(["addHandler", "checkoutComplete", function(data) {
+            sessionStorage.setItem("gdpa_purchase", JSON.stringify({
+              termName: data.termName || "",
+              chargeAmount: data.chargeAmount || 0,
+              chargeCurrency: data.chargeCurrency || "USD",
+              startDate: data.startDate || "",
+              expireDate: data.expireDate || "",
+            }));
+            navigate("/welcome");
+          }]);
         }]);
       } else {
         setTimeout(setupPianoCallbacks, 100);

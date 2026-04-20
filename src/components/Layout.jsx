@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { COLORS } from '../data';
 
 export default function Layout({ children }) {
@@ -7,6 +7,16 @@ export default function Layout({ children }) {
   const [userName, setUserName] = useState("");
   const [userEmail, setUserEmail] = useState("");
   const navigate = useNavigate();
+  const location = useLocation();
+
+  // Re-execute Composer experiences on every route change
+  useEffect(() => {
+    if (typeof window !== 'undefined' && window.tp) {
+      window.tp.push(["init", function () {
+        window.tp.experience.execute();
+      }]);
+    }
+  }, [location.pathname]);
 
   // Set up Piano ID callbacks
   useEffect(() => {

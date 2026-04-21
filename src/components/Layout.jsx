@@ -18,11 +18,19 @@ export default function Layout({ children }) {
     }
   }, [location.pathname]);
 
-  // Set up Piano ID callbacks
+  // Set up Piano ID callbacks and restore existing session on mount
   useEffect(() => {
     const setupPianoCallbacks = () => {
       if (typeof window !== 'undefined' && window.tp) {
         window.tp.push(["init", function() {
+          // Restore session if user is already logged in
+          const user = window.tp.pianoId.getUser();
+          if (user) {
+            setIsLoggedIn(true);
+            setUserName(`${user.given_name || user.firstName || ''} ${user.family_name || user.lastName || ''}`.trim() || user.email);
+            setUserEmail(user.email);
+          }
+
           window.tp.push(["addHandler", "loginSuccess", function(data) {
             setIsLoggedIn(true);
             setUserName(`${data.user.given_name || ''} ${data.user.family_name || ''}`.trim() || data.user.email);

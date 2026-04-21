@@ -63,12 +63,20 @@ export default function CertificationDetail() {
             This globally recognized credential demonstrates your expertise to employers and clients, with 92% of certificate holders reporting career advancement within one year. The program includes access to our online learning platform, practice exams, and exclusive member forums for ongoing professional development.
           </p>
 
-          <button style={{
-            background: COLORS.primary, color: "white", border: "none",
-            padding: "14px 32px", borderRadius: 6, fontWeight: 700,
-            fontSize: 16, cursor: "pointer", fontFamily: "'Lato', sans-serif",
-          }}>
-            View Full Curriculum & Enroll
+          <button
+            onClick={() => {
+              if (cert.offerId && window.tp) {
+                window.tp.push(["init", function () {
+                  window.tp.offer.show({ offerId: cert.offerId, displayMode: "modal" });
+                }]);
+              }
+            }}
+            style={{
+              background: COLORS.primary, color: "white", border: "none",
+              padding: "14px 32px", borderRadius: 6, fontWeight: 700,
+              fontSize: 16, cursor: "pointer", fontFamily: "'Lato', sans-serif",
+            }}>
+            {cert.offerId ? "Enroll Now" : "View Full Curriculum & Enroll"}
           </button>
         </div>
       </div>

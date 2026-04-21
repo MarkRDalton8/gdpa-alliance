@@ -59,6 +59,15 @@ export default function WelcomePage() {
     ? new Date(purchase.expireDate * 1000).toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" })
     : null;
 
+  const termName = purchase?.termName || "";
+  const isMembership = !termName || termName.toLowerCase().includes("membership");
+
+  const NEXT_STEPS = isMembership ? null : [
+    { icon: "📧", text: "Check your email for a confirmation and access instructions." },
+    { icon: "🔑", text: "Your access is now active — sign in to your account to get started." },
+    { icon: "📋", text: "Visit My Account to view all your active enrollments and resources." },
+  ];
+
   return (
     <Layout>
       <div style={{ maxWidth: 780, margin: "0 auto" }}>
@@ -72,19 +81,21 @@ export default function WelcomePage() {
           border: `1px solid ${COLORS.primary}25`,
           marginBottom: 40,
         }}>
-          <div style={{ fontSize: 56, marginBottom: 16 }}>🎉</div>
+          <div style={{ fontSize: 56, marginBottom: 16 }}>{isMembership ? "🎉" : "✅"}</div>
           <h1 style={{
             fontSize: 34, fontWeight: 700, marginBottom: 12,
             color: COLORS.neutral, fontFamily: "'Lato', sans-serif",
           }}>
-            Welcome{userName ? `, ${userName}` : ""}!
+            {isMembership
+              ? `Welcome${userName ? `, ${userName}` : ""}!`
+              : `You're enrolled${userName ? `, ${userName}` : ""}!`}
           </h1>
           <p style={{ fontSize: 18, color: "#444", marginBottom: 24, lineHeight: 1.5 }}>
-            Your{purchase?.termName ? ` ${purchase.termName}` : " GDPA"} membership is now active.
-            You have full access to everything listed below.
+            {isMembership
+              ? `Your${termName ? ` ${termName}` : " GDPA"} membership is now active. You have full access to everything listed below.`
+              : `Your registration for ${termName || "this course"} is confirmed. You're all set.`}
           </p>
 
-          {/* Membership details pill */}
           {formattedExpiry && (
             <div style={{
               display: "inline-flex", alignItems: "center", gap: 10,
@@ -96,158 +107,177 @@ export default function WelcomePage() {
                 background: COLORS.primary, display: "inline-block",
               }} />
               <span style={{ color: "#555" }}>
-                Active membership · Renews <strong style={{ color: COLORS.neutral }}>{formattedExpiry}</strong>
+                {isMembership ? "Active membership · Renews" : "Access expires"}{" "}
+                <strong style={{ color: COLORS.neutral }}>{formattedExpiry}</strong>
               </span>
             </div>
           )}
         </div>
 
-        {/* Member discount promo code */}
-        <div style={{
-          background: "#FFFBEB",
-          border: "1px solid #F59E0B40",
-          borderLeft: "4px solid #F59E0B",
-          borderRadius: 8,
-          padding: "24px 28px",
-          marginBottom: 40,
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "space-between",
-          gap: 24,
-          flexWrap: "wrap",
-        }}>
-          <div>
-            <div style={{
-              fontSize: 12, fontWeight: 700, letterSpacing: "0.8px",
-              textTransform: "uppercase", color: "#B45309",
-              fontFamily: "'Lato', sans-serif", marginBottom: 6,
-            }}>
-              🎁 Member Exclusive
-            </div>
-            <p style={{ fontSize: 15, color: "#1A1A1A", fontWeight: 600, marginBottom: 4 }}>
-              10% off certifications &amp; training
-            </p>
-            <p style={{ fontSize: 13, color: "#666", margin: 0 }}>
-              Use this code at checkout when purchasing any GDPA certification or training course.
-            </p>
-          </div>
-          <div style={{ textAlign: "center", flexShrink: 0 }}>
-            <div style={{
-              background: "white",
-              border: "1.5px dashed #F59E0B",
-              borderRadius: 8,
-              padding: "12px 28px",
-              fontFamily: "monospace",
-              fontSize: 22,
-              fontWeight: 700,
-              letterSpacing: "3px",
-              color: COLORS.neutral,
-              marginBottom: 6,
-            }}>
-              MEMBER10
-            </div>
-            <p style={{ fontSize: 11, color: "#999", margin: 0 }}>
-              Valid for 12 months · One use per order
-            </p>
-          </div>
-        </div>
-
-        {/* Benefits grid */}
-        <h2 style={{
-          fontSize: 20, fontWeight: 700, marginBottom: 20,
-          color: COLORS.neutral, fontFamily: "'Lato', sans-serif",
-        }}>
-          Your Member Benefits
-        </h2>
-
-        <div style={{
-          display: "grid",
-          gridTemplateColumns: "repeat(2, 1fr)",
-          gap: 20,
-          marginBottom: 40,
-        }}>
-          {BENEFITS.map((benefit) => (
-            <div key={benefit.title} style={{
-              background: "white",
-              border: `1px solid ${COLORS.border}`,
-              borderRadius: 10,
-              padding: 28,
-              display: "flex",
-              flexDirection: "column",
-            }}>
-              <div style={{ fontSize: 32, marginBottom: 14 }}>{benefit.icon}</div>
-              <h3 style={{
-                fontSize: 16, fontWeight: 700, marginBottom: 8,
-                color: COLORS.neutral, fontFamily: "'Lato', sans-serif",
+        {/* Membership: promo code block */}
+        {isMembership && (
+          <div style={{
+            background: "#FFFBEB",
+            border: "1px solid #F59E0B40",
+            borderLeft: "4px solid #F59E0B",
+            borderRadius: 8,
+            padding: "24px 28px",
+            marginBottom: 40,
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "space-between",
+            gap: 24,
+            flexWrap: "wrap",
+          }}>
+            <div>
+              <div style={{
+                fontSize: 12, fontWeight: 700, letterSpacing: "0.8px",
+                textTransform: "uppercase", color: "#B45309",
+                fontFamily: "'Lato', sans-serif", marginBottom: 6,
               }}>
-                {benefit.title}
-              </h3>
-              <p style={{
-                fontSize: 13, color: "#666", lineHeight: 1.6,
-                flex: 1, marginBottom: 20,
-              }}>
-                {benefit.description}
+                🎁 Member Exclusive
+              </div>
+              <p style={{ fontSize: 15, color: "#1A1A1A", fontWeight: 600, marginBottom: 4 }}>
+                10% off certifications &amp; training
               </p>
-              <Link to={benefit.to} style={{
-                display: "inline-block",
-                padding: "9px 20px",
-                borderRadius: 6,
-                border: `1px solid ${COLORS.primary}`,
-                color: COLORS.primary,
+              <p style={{ fontSize: 13, color: "#666", margin: 0 }}>
+                Use this code at checkout when purchasing any GDPA certification or training course.
+              </p>
+            </div>
+            <div style={{ textAlign: "center", flexShrink: 0 }}>
+              <div style={{
+                background: "white",
+                border: "1.5px dashed #F59E0B",
+                borderRadius: 8,
+                padding: "12px 28px",
+                fontFamily: "monospace",
+                fontSize: 22,
                 fontWeight: 700,
-                fontSize: 13,
-                fontFamily: "'Lato', sans-serif",
+                letterSpacing: "3px",
+                color: COLORS.neutral,
+                marginBottom: 6,
+              }}>
+                MEMBER10
+              </div>
+              <p style={{ fontSize: 11, color: "#999", margin: 0 }}>
+                Valid for 12 months · One use per order
+              </p>
+            </div>
+          </div>
+        )}
+
+        {/* Membership: benefits grid */}
+        {isMembership && (
+          <>
+            <h2 style={{
+              fontSize: 20, fontWeight: 700, marginBottom: 20,
+              color: COLORS.neutral, fontFamily: "'Lato', sans-serif",
+            }}>
+              Your Member Benefits
+            </h2>
+            <div style={{
+              display: "grid", gridTemplateColumns: "repeat(2, 1fr)",
+              gap: 20, marginBottom: 40,
+            }}>
+              {BENEFITS.map((benefit) => (
+                <div key={benefit.title} style={{
+                  background: "white", border: `1px solid ${COLORS.border}`,
+                  borderRadius: 10, padding: 28, display: "flex", flexDirection: "column",
+                }}>
+                  <div style={{ fontSize: 32, marginBottom: 14 }}>{benefit.icon}</div>
+                  <h3 style={{
+                    fontSize: 16, fontWeight: 700, marginBottom: 8,
+                    color: COLORS.neutral, fontFamily: "'Lato', sans-serif",
+                  }}>
+                    {benefit.title}
+                  </h3>
+                  <p style={{ fontSize: 13, color: "#666", lineHeight: 1.6, flex: 1, marginBottom: 20 }}>
+                    {benefit.description}
+                  </p>
+                  <Link to={benefit.to} style={{
+                    display: "inline-block", padding: "9px 20px", borderRadius: 6,
+                    border: `1px solid ${COLORS.primary}`, color: COLORS.primary,
+                    fontWeight: 700, fontSize: 13, fontFamily: "'Lato', sans-serif",
+                    textDecoration: "none", textAlign: "center", transition: "all 0.2s ease",
+                  }}
+                  onMouseEnter={e => { e.currentTarget.style.background = COLORS.primary; e.currentTarget.style.color = "white"; }}
+                  onMouseLeave={e => { e.currentTarget.style.background = "transparent"; e.currentTarget.style.color = COLORS.primary; }}
+                  >
+                    {benefit.cta} →
+                  </Link>
+                </div>
+              ))}
+            </div>
+          </>
+        )}
+
+        {/* Cert/Training: next steps */}
+        {!isMembership && (
+          <>
+            <h2 style={{
+              fontSize: 20, fontWeight: 700, marginBottom: 20,
+              color: COLORS.neutral, fontFamily: "'Lato', sans-serif",
+            }}>
+              Next Steps
+            </h2>
+            <div style={{ marginBottom: 40 }}>
+              {NEXT_STEPS.map((step, i) => (
+                <div key={i} style={{
+                  display: "flex", alignItems: "flex-start", gap: 16,
+                  background: "white", border: `1px solid ${COLORS.border}`,
+                  borderRadius: 10, padding: "20px 24px",
+                  marginBottom: i < NEXT_STEPS.length - 1 ? 12 : 0,
+                }}>
+                  <span style={{ fontSize: 24, flexShrink: 0 }}>{step.icon}</span>
+                  <p style={{ fontSize: 15, color: "#444", lineHeight: 1.6, margin: 0 }}>{step.text}</p>
+                </div>
+              ))}
+            </div>
+
+            <div style={{ display: "flex", gap: 12, marginBottom: 40 }}>
+              <Link to="/certifications" style={{
+                flex: 1, padding: "12px 0", borderRadius: 6, textAlign: "center",
+                border: `1px solid ${COLORS.primary}`, color: COLORS.primary,
+                fontWeight: 700, fontSize: 14, fontFamily: "'Lato', sans-serif",
                 textDecoration: "none",
-                textAlign: "center",
-                transition: "all 0.2s ease",
-              }}
-              onMouseEnter={e => {
-                e.currentTarget.style.background = COLORS.primary;
-                e.currentTarget.style.color = "white";
-              }}
-              onMouseLeave={e => {
-                e.currentTarget.style.background = "transparent";
-                e.currentTarget.style.color = COLORS.primary;
-              }}
-              >
-                {benefit.cta} →
+              }}>
+                Browse More Certifications
+              </Link>
+              <Link to="/training" style={{
+                flex: 1, padding: "12px 0", borderRadius: 6, textAlign: "center",
+                border: `1px solid ${COLORS.primary}`, color: COLORS.primary,
+                fontWeight: 700, fontSize: 14, fontFamily: "'Lato', sans-serif",
+                textDecoration: "none",
+              }}>
+                Browse More Training
               </Link>
             </div>
-          ))}
-        </div>
+          </>
+        )}
 
-        {/* My Account CTA */}
+        {/* My Account CTA — shown for all purchase types */}
         <div style={{
-          background: COLORS.neutral,
-          borderRadius: 10,
-          padding: "28px 32px",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "space-between",
-          gap: 24,
+          background: COLORS.neutral, borderRadius: 10, padding: "28px 32px",
+          display: "flex", alignItems: "center", justifyContent: "space-between", gap: 24,
         }}>
           <div>
             <h3 style={{
               fontSize: 16, fontWeight: 700, color: "white",
               fontFamily: "'Lato', sans-serif", marginBottom: 4,
             }}>
-              Manage your membership
+              {isMembership ? "Manage your membership" : "View your enrollments"}
             </h3>
             <p style={{ fontSize: 13, color: "rgba(255,255,255,0.65)", margin: 0 }}>
-              View billing details, update payment method, or manage auto-renewal in My Account.
+              {isMembership
+                ? "View billing details, update payment method, or manage auto-renewal in My Account."
+                : "Access all your active courses, exams, and resources in My Account."}
             </p>
           </div>
           <Link to="/account" style={{
-            flexShrink: 0,
-            background: "white",
-            color: COLORS.neutral,
-            padding: "10px 24px",
-            borderRadius: 6,
-            fontWeight: 700,
-            fontSize: 14,
-            fontFamily: "'Lato', sans-serif",
-            textDecoration: "none",
-            whiteSpace: "nowrap",
+            flexShrink: 0, background: "white", color: COLORS.neutral,
+            padding: "10px 24px", borderRadius: 6, fontWeight: 700,
+            fontSize: 14, fontFamily: "'Lato', sans-serif",
+            textDecoration: "none", whiteSpace: "nowrap",
           }}>
             Go to My Account
           </Link>

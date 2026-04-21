@@ -73,12 +73,20 @@ export default function TrainingDetail() {
             The session includes live polling, case study breakouts, and dedicated Q&A time with the instructor. All registrants receive session recordings, slide decks, and a curated resource library of referenced enforcement decisions.
           </p>
 
-          <button style={{
-            background: COLORS.primary, color: "white", border: "none",
-            padding: "14px 32px", borderRadius: 6, fontWeight: 700,
-            fontSize: 16, cursor: "pointer", fontFamily: "'Lato', sans-serif",
-          }}>
-            Register for Session
+          <button
+            onClick={() => {
+              if (training.offerId && window.tp) {
+                window.tp.push(["init", function () {
+                  window.tp.offer.show({ offerId: training.offerId, displayMode: "modal" });
+                }]);
+              }
+            }}
+            style={{
+              background: COLORS.primary, color: "white", border: "none",
+              padding: "14px 32px", borderRadius: 6, fontWeight: 700,
+              fontSize: 16, cursor: "pointer", fontFamily: "'Lato', sans-serif",
+            }}>
+            {training.offerId ? "Register Now" : "Register for Session"}
           </button>
         </div>
       </div>

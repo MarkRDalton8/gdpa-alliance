@@ -14,7 +14,8 @@ export default function CertificationDetail() {
     const tp = window.tp || [];
     tp.push(["init", function () {
       window.tp.api.callApi("/access/check", { rid: cert.resourceId }, function (response) {
-        if (response?.data?.access?.granted) setHasAccess(true);
+        console.log("[GDPA] cert access check response:", JSON.stringify(response));
+        if (response?.access?.granted || response?.data?.access?.granted) setHasAccess(true);
       });
     }]);
   }, [cert?.resourceId]);

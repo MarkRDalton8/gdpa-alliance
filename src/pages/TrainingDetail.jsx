@@ -14,7 +14,8 @@ export default function TrainingDetail() {
     const tp = window.tp || [];
     tp.push(["init", function () {
       window.tp.api.callApi("/access/check", { rid: training.resourceId }, function (response) {
-        if (response?.data?.access?.granted) setHasAccess(true);
+        console.log("[GDPA] training access check response:", JSON.stringify(response));
+        if (response?.access?.granted || response?.data?.access?.granted) setHasAccess(true);
       });
     }]);
   }, [training?.resourceId]);

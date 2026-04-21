@@ -14,6 +14,7 @@ import AccountPage from './pages/AccountPage'
 import ApiDemo from './pages/ApiDemo'
 import MembershipPage from './pages/MembershipPage'
 import WelcomePage from './pages/WelcomePage'
+import LandingPage from './pages/LandingPage'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
@@ -32,6 +33,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
         <Route path="/welcome" element={<WelcomePage />} />
         <Route path="/account" element={<AccountPage />} />
         <Route path="/demo" element={<ApiDemo />} />
+        <Route path="/landing-page" element={<LandingPage />} />
       </Routes>
     </BrowserRouter>
   </React.StrictMode>,

@@ -8,7 +8,7 @@ export default function LandingPage() {
     const tp = window.tp || [];
     tp.push(["init", function () {
       window.tp.offer.show({
-        offerId: TEMPLATE_ID,
+        templateId: TEMPLATE_ID,
         displayMode: "inline",
         containerSelector: "#piano-landing-container",
       });

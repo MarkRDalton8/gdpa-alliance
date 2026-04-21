@@ -14,14 +14,14 @@ const BENEFITS = [
   {
     icon: '🎓',
     title: 'Certification Discounts',
-    description: 'Member pricing on all GDPA certifications — CIPP/E, CIPM, CIPT, and more. Your discount is applied automatically at checkout.',
+    description: 'Save 10% on all GDPA certifications — CIPP/E, CIPM, CIPT, and more. Enter code MEMBER10 at checkout.',
     cta: 'View Certifications',
     to: '/certifications',
   },
   {
     icon: '💻',
     title: 'Training Access',
-    description: 'Exclusive access to live webinars, on-demand training sessions, and member-only workshops.',
+    description: 'Save 10% on live webinars and on-demand training. Enter code MEMBER10 at checkout.',
     cta: 'Browse Training',
     to: '/training',
   },
@@ -100,6 +100,56 @@ export default function WelcomePage() {
               </span>
             </div>
           )}
+        </div>
+
+        {/* Member discount promo code */}
+        <div style={{
+          background: "#FFFBEB",
+          border: "1px solid #F59E0B40",
+          borderLeft: "4px solid #F59E0B",
+          borderRadius: 8,
+          padding: "24px 28px",
+          marginBottom: 40,
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "space-between",
+          gap: 24,
+          flexWrap: "wrap",
+        }}>
+          <div>
+            <div style={{
+              fontSize: 12, fontWeight: 700, letterSpacing: "0.8px",
+              textTransform: "uppercase", color: "#B45309",
+              fontFamily: "'Lato', sans-serif", marginBottom: 6,
+            }}>
+              🎁 Member Exclusive
+            </div>
+            <p style={{ fontSize: 15, color: "#1A1A1A", fontWeight: 600, marginBottom: 4 }}>
+              10% off certifications &amp; training
+            </p>
+            <p style={{ fontSize: 13, color: "#666", margin: 0 }}>
+              Use this code at checkout when purchasing any GDPA certification or training course.
+            </p>
+          </div>
+          <div style={{ textAlign: "center", flexShrink: 0 }}>
+            <div style={{
+              background: "white",
+              border: "1.5px dashed #F59E0B",
+              borderRadius: 8,
+              padding: "12px 28px",
+              fontFamily: "monospace",
+              fontSize: 22,
+              fontWeight: 700,
+              letterSpacing: "3px",
+              color: COLORS.neutral,
+              marginBottom: 6,
+            }}>
+              MEMBER10
+            </div>
+            <p style={{ fontSize: 11, color: "#999", margin: 0 }}>
+              Valid for 12 months · One use per order
+            </p>
+          </div>
         </div>
 
         {/* Benefits grid */}

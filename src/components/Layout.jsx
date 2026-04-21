@@ -109,12 +109,13 @@ export default function Layout({ children }) {
               </div>
             </Link>
 
-            <nav style={{ display: "flex", gap: 32 }}>
+            <nav style={{ display: "flex", gap: 20 }}>
               {navItems.map(item => (
                 <Link key={item.key} to={item.path} style={{
-                  textDecoration: "none", fontWeight: 500, fontSize: 14, color: COLORS.neutral,
-                  fontFamily: "'Lato', sans-serif", textTransform: "uppercase", letterSpacing: "0.5px",
+                  textDecoration: "none", fontWeight: 500, fontSize: 13, color: COLORS.neutral,
+                  fontFamily: "'Lato', sans-serif", textTransform: "uppercase", letterSpacing: "0.3px",
                   padding: "8px 0", borderBottom: "2px solid transparent", transition: "all 0.2s ease",
+                  whiteSpace: "nowrap",
                 }}
                 onMouseEnter={e => e.currentTarget.style.color = COLORS.primary}
                 onMouseLeave={e => e.currentTarget.style.color = COLORS.neutral}

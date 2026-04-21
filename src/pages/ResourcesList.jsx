@@ -1,8 +1,22 @@
+import { useState, useEffect } from 'react';
 import Layout from '../components/Layout';
 import { ContentCard, LockBadge } from '../components/SharedComponents';
 import { COLORS, RESOURCES } from '../data';
 
+const MEMBERSHIP_RESOURCE_ID = "R44AIFA";
+
 export default function ResourcesList() {
+  const [hasMembership, setHasMembership] = useState(false);
+
+  useEffect(() => {
+    const tp = window.tp || [];
+    tp.push(["init", function () {
+      window.tp.api.callApi("/access/check", { rid: MEMBERSHIP_RESOURCE_ID }, function (response) {
+        if (response?.access?.granted || response?.data?.access?.granted) setHasMembership(true);
+      });
+    }]);
+  }, []);
+
   return (
     <Layout>
       <h2 style={{ fontSize: 36, fontWeight: 700, marginBottom: 12, color: COLORS.neutral, fontFamily: "'Lato', sans-serif" }}>Privacy Resources</h2>
@@ -20,7 +34,7 @@ export default function ResourcesList() {
                   <span>📖 {resource.pages} pages</span>
                 </div>
               </div>
-              <LockBadge locked={resource.locked} />
+              <LockBadge locked={resource.locked} hasAccess={hasMembership} />
             </div>
             <p style={{ fontSize: 14, color: "#666", lineHeight: 1.6 }}>{resource.description}</p>
           </ContentCard>

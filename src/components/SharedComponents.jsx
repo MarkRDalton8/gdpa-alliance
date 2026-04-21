@@ -1,18 +1,41 @@
 import { Link } from 'react-router-dom';
 import { COLORS } from '../data';
 
-export const LockBadge = ({ locked }) => (
-  <span style={{
-    display: "inline-flex", alignItems: "center", gap: 4,
-    padding: "4px 12px", borderRadius: 20, fontSize: 11, fontWeight: 600,
-    fontFamily: "'Lato', sans-serif", letterSpacing: "0.5px", textTransform: "uppercase",
-    background: locked ? "rgba(142, 36, 42, 0.1)" : "rgba(72, 132, 59, 0.1)",
-    color: locked ? COLORS.warning : COLORS.primary,
-    border: `1px solid ${locked ? "rgba(142, 36, 42, 0.2)" : "rgba(72, 132, 59, 0.2)"}`,
-  }}>
-    {locked ? "🔒 Member Access" : "✓ Free Access"}
-  </span>
-);
+export const LockBadge = ({ locked, hasAccess }) => {
+  if (!locked) return (
+    <span style={{
+      display: "inline-flex", alignItems: "center", gap: 4,
+      padding: "4px 12px", borderRadius: 20, fontSize: 11, fontWeight: 600,
+      fontFamily: "'Lato', sans-serif", letterSpacing: "0.5px", textTransform: "uppercase",
+      background: "rgba(72, 132, 59, 0.1)", color: COLORS.primary,
+      border: "1px solid rgba(72, 132, 59, 0.2)",
+    }}>
+      ✓ Free Access
+    </span>
+  );
+  if (hasAccess) return (
+    <span style={{
+      display: "inline-flex", alignItems: "center", gap: 4,
+      padding: "4px 12px", borderRadius: 20, fontSize: 11, fontWeight: 600,
+      fontFamily: "'Lato', sans-serif", letterSpacing: "0.5px", textTransform: "uppercase",
+      background: "rgba(72, 132, 59, 0.1)", color: COLORS.primary,
+      border: "1px solid rgba(72, 132, 59, 0.2)",
+    }}>
+      🔓 Member Access
+    </span>
+  );
+  return (
+    <span style={{
+      display: "inline-flex", alignItems: "center", gap: 4,
+      padding: "4px 12px", borderRadius: 20, fontSize: 11, fontWeight: 600,
+      fontFamily: "'Lato', sans-serif", letterSpacing: "0.5px", textTransform: "uppercase",
+      background: "rgba(142, 36, 42, 0.1)", color: COLORS.warning,
+      border: "1px solid rgba(142, 36, 42, 0.2)",
+    }}>
+      🔒 Member Access
+    </span>
+  );
+};
 
 export const ContentCard = ({ to, children }) => (
   <Link to={to} style={{

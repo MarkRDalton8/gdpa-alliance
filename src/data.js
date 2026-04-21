@@ -3,38 +3,38 @@
 export const CERTIFICATIONS = [
   {
     id: 1,
-    slug: "cipp-e",
-    title: "Certified Information Privacy Professional (CIPP/E)",
+    slug: "aigp-exam",
+    title: "AIGP Exam",
     level: "Professional",
     duration: "3 months",
-    description: "Comprehensive European privacy law certification covering GDPR, DPD, and emerging regulations across EU member states.",
+    description: "The AI Governance Professional (AIGP) exam validates your ability to develop, implement, and manage responsible AI governance programs.",
     locked: true
   },
   {
     id: 2,
-    slug: "cipm",
-    title: "Certified Information Privacy Manager (CIPM)",
+    slug: "cipm-exam",
+    title: "CIPM Exam",
     level: "Management",
     duration: "2 months",
-    description: "Privacy program management certification focusing on operational frameworks, vendor management, and organizational compliance.",
+    description: "The Certified Information Privacy Manager (CIPM) exam demonstrates your ability to establish, maintain, and manage a privacy program.",
     locked: true
   },
   {
     id: 3,
-    slug: "privacy-fundamentals",
-    title: "Privacy Fundamentals Certificate",
-    level: "Foundation",
-    duration: "4 weeks",
-    description: "Introduction to global privacy principles, key regulations, and foundational concepts for professionals new to privacy.",
+    slug: "cipp-a-exam",
+    title: "CIPP/A Exam",
+    level: "Professional",
+    duration: "3 months",
+    description: "The CIPP/A exam certifies your knowledge of privacy laws and practices across the Asia-Pacific region.",
     locked: false
   },
   {
     id: 4,
-    slug: "cipt",
-    title: "Certified Information Privacy Technologist (CIPT)",
-    level: "Technical",
+    slug: "cipp-c-exam",
+    title: "CIPP/C Exam",
+    level: "Professional",
     duration: "3 months",
-    description: "Technical privacy certification covering privacy engineering, security controls, and privacy-enhancing technologies.",
+    description: "The CIPP/C exam certifies your expertise in Canadian privacy legislation including PIPEDA and provincial privacy laws.",
     locked: true
   },
 ];
@@ -42,20 +42,9 @@ export const CERTIFICATIONS = [
 export const TRAINING = [
   {
     id: 1,
-    slug: "gdpr-enforcement-2026",
-    code: "GDPR-301",
-    title: "Advanced GDPR Enforcement Trends 2026",
-    instructor: "Sarah Chen, CIPP/E",
-    date: "Apr 15, 2026",
-    seats: 45,
-    duration: "90 min",
-    locked: true
-  },
-  {
-    id: 2,
-    slug: "ai-governance",
-    code: "AI-200",
-    title: "AI Governance & Privacy Risk Assessment",
+    slug: "aigp-online-training",
+    code: "AIGP-100",
+    title: "AI Governance Professional (AIGP) Online Training",
     instructor: "Dr. Marcus Rodriguez",
     date: "Apr 22, 2026",
     seats: 60,
@@ -63,26 +52,37 @@ export const TRAINING = [
     locked: true
   },
   {
+    id: 2,
+    slug: "cipp-c-online-training",
+    code: "CIPP-C-100",
+    title: "Canadian Privacy (CIPP/C) Online Training",
+    instructor: "Jennifer Park, CIPP/C",
+    date: "Apr 29, 2026",
+    seats: 45,
+    duration: "90 min",
+    locked: true
+  },
+  {
     id: 3,
-    slug: "privacy-fundamentals-webinar",
-    code: "INTRO-100",
-    title: "Privacy Law Fundamentals Webinar",
-    instructor: "Jennifer Park, CIPP/US",
-    date: "Apr 8, 2026",
-    seats: 200,
-    duration: "60 min",
-    locked: false
+    slug: "cipp-e-online-training",
+    code: "CIPP-E-100",
+    title: "European Data Protection (CIPP/E) Online Training",
+    instructor: "Sarah Chen, CIPP/E",
+    date: "May 6, 2026",
+    seats: 80,
+    duration: "120 min",
+    locked: true
   },
   {
     id: 4,
-    slug: "cpra-implementation",
-    code: "CPRA-250",
-    title: "CPRA Implementation Workshop",
+    slug: "foundations-privacy",
+    code: "FOUND-100",
+    title: "Foundations of Privacy and Data Protection Online Training",
     instructor: "Kevin Thompson, CIPM",
-    date: "Apr 29, 2026",
-    seats: 35,
-    duration: "180 min",
-    locked: true
+    date: "Apr 15, 2026",
+    seats: 200,
+    duration: "60 min",
+    locked: false
   },
 ];
 

@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import Layout from '../components/Layout';
 import { LockBadge } from '../components/SharedComponents';
@@ -6,6 +7,17 @@ import { COLORS, TRAINING } from '../data';
 export default function TrainingDetail() {
   const { slug } = useParams();
   const training = TRAINING.find(t => t.slug === slug);
+  const [hasAccess, setHasAccess] = useState(false);
+
+  useEffect(() => {
+    if (!training?.resourceId) return;
+    const tp = window.tp || [];
+    tp.push(["init", function () {
+      window.tp.api.callApi("/access/check", { rid: training.resourceId }, function (response) {
+        if (response?.data?.access?.granted) setHasAccess(true);
+      });
+    }]);
+  }, [training?.resourceId]);
 
   if (!training) return <Layout><div style={{textAlign:"center",padding:"48px 0"}}><h1>Training Not Found</h1></div></Layout>;
 
@@ -73,21 +85,31 @@ export default function TrainingDetail() {
             The session includes live polling, case study breakouts, and dedicated Q&A time with the instructor. All registrants receive session recordings, slide decks, and a curated resource library of referenced enforcement decisions.
           </p>
 
-          <button
-            onClick={() => {
-              if (training.offerId && window.tp) {
-                window.tp.push(["init", function () {
-                  window.tp.offer.show({ offerId: training.offerId, displayMode: "modal" });
-                }]);
-              }
-            }}
-            style={{
-              background: COLORS.primary, color: "white", border: "none",
+          {hasAccess ? (
+            <button style={{
+              background: COLORS.secondary, color: "white", border: "none",
               padding: "14px 32px", borderRadius: 6, fontWeight: 700,
               fontSize: 16, cursor: "pointer", fontFamily: "'Lato', sans-serif",
             }}>
-            {training.offerId ? "Register Now" : "Register for Session"}
-          </button>
+              Start Training →
+            </button>
+          ) : (
+            <button
+              onClick={() => {
+                if (training.offerId && window.tp) {
+                  window.tp.push(["init", function () {
+                    window.tp.offer.show({ offerId: training.offerId, displayMode: "modal" });
+                  }]);
+                }
+              }}
+              style={{
+                background: COLORS.primary, color: "white", border: "none",
+                padding: "14px 32px", borderRadius: 6, fontWeight: 700,
+                fontSize: 16, cursor: "pointer", fontFamily: "'Lato', sans-serif",
+              }}>
+              {training.offerId ? "Register Now" : "Register for Session"}
+            </button>
+          )}
         </div>
       </div>
     </Layout>

@@ -10,6 +10,7 @@ export const CERTIFICATIONS = [
     description: "The AI Governance Professional (AIGP) exam validates your ability to develop, implement, and manage responsible AI governance programs.",
     locked: true,
     offerId: "OFYJWRMTUY5S",
+    resourceId: "R9KI7UN",
   },
   {
     id: 2,
@@ -52,6 +53,7 @@ export const TRAINING = [
     duration: "120 min",
     locked: true,
     offerId: "OF7TWO03VVWY",
+    resourceId: "R4K8M9E",
   },
   {
     id: 2,

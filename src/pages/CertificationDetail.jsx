@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import Layout from '../components/Layout';
 import { LockBadge } from '../components/SharedComponents';
@@ -6,6 +7,17 @@ import { COLORS, CERTIFICATIONS } from '../data';
 export default function CertificationDetail() {
   const { slug } = useParams();
   const cert = CERTIFICATIONS.find(c => c.slug === slug);
+  const [hasAccess, setHasAccess] = useState(false);
+
+  useEffect(() => {
+    if (!cert?.resourceId) return;
+    const tp = window.tp || [];
+    tp.push(["init", function () {
+      window.tp.api.callApi("/access/check", { rid: cert.resourceId }, function (response) {
+        if (response?.data?.access?.granted) setHasAccess(true);
+      });
+    }]);
+  }, [cert?.resourceId]);
 
   if (!cert) return <Layout><div style={{textAlign:"center",padding:"48px 0"}}><h1>Certification Not Found</h1></div></Layout>;
 
@@ -63,21 +75,31 @@ export default function CertificationDetail() {
             This globally recognized credential demonstrates your expertise to employers and clients, with 92% of certificate holders reporting career advancement within one year. The program includes access to our online learning platform, practice exams, and exclusive member forums for ongoing professional development.
           </p>
 
-          <button
-            onClick={() => {
-              if (cert.offerId && window.tp) {
-                window.tp.push(["init", function () {
-                  window.tp.offer.show({ offerId: cert.offerId, displayMode: "modal" });
-                }]);
-              }
-            }}
-            style={{
-              background: COLORS.primary, color: "white", border: "none",
+          {hasAccess ? (
+            <button style={{
+              background: COLORS.secondary, color: "white", border: "none",
               padding: "14px 32px", borderRadius: 6, fontWeight: 700,
               fontSize: 16, cursor: "pointer", fontFamily: "'Lato', sans-serif",
             }}>
-            {cert.offerId ? "Enroll Now" : "View Full Curriculum & Enroll"}
-          </button>
+              Start Exam →
+            </button>
+          ) : (
+            <button
+              onClick={() => {
+                if (cert.offerId && window.tp) {
+                  window.tp.push(["init", function () {
+                    window.tp.offer.show({ offerId: cert.offerId, displayMode: "modal" });
+                  }]);
+                }
+              }}
+              style={{
+                background: COLORS.primary, color: "white", border: "none",
+                padding: "14px 32px", borderRadius: 6, fontWeight: 700,
+                fontSize: 16, cursor: "pointer", fontFamily: "'Lato', sans-serif",
+              }}>
+              {cert.offerId ? "Enroll Now" : "View Full Curriculum & Enroll"}
+            </button>
+          )}
         </div>
       </div>
     </Layout>

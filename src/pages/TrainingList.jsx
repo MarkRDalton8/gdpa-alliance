@@ -1,8 +1,22 @@
+import { useState, useEffect } from 'react';
 import Layout from '../components/Layout';
 import { ContentCard, LockBadge } from '../components/SharedComponents';
 import { COLORS, TRAINING } from '../data';
 
+const TRAINING_RESOURCE_ID = "BR2F9M1P";
+
 export default function TrainingList() {
+  const [hasAccess, setHasAccess] = useState(false);
+
+  useEffect(() => {
+    const tp = window.tp || [];
+    tp.push(["init", function () {
+      window.tp.api.callApi("/access/check", { rid: TRAINING_RESOURCE_ID }, function (response) {
+        if (response?.access?.granted || response?.data?.access?.granted) setHasAccess(true);
+      });
+    }]);
+  }, []);
+
   return (
     <Layout>
       <h2 style={{ fontSize: 36, fontWeight: 700, marginBottom: 12, color: COLORS.neutral, fontFamily: "'Lato', sans-serif" }}>Training & Webinars</h2>
@@ -21,7 +35,7 @@ export default function TrainingList() {
                   <span>⏱ {training.duration}</span>
                 </div>
               </div>
-              <LockBadge locked={training.locked} />
+              <LockBadge locked={training.locked} hasAccess={training.locked && hasAccess} />
             </div>
             <div style={{ marginTop: 12, padding: "8px 12px", background: COLORS.neutralLight, borderRadius: 4, fontSize: 13 }}>
               {training.seats} seats available

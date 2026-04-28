@@ -4,21 +4,21 @@ import Layout from '../components/Layout';
 import { LockBadge } from '../components/SharedComponents';
 import { COLORS, TRAINING } from '../data';
 
+const TRAINING_RESOURCE_ID = "BR2F9M1P";
+
 export default function TrainingDetail() {
   const { slug } = useParams();
   const training = TRAINING.find(t => t.slug === slug);
   const [hasAccess, setHasAccess] = useState(false);
 
   useEffect(() => {
-    if (!training?.resourceId) return;
     const tp = window.tp || [];
     tp.push(["init", function () {
-      window.tp.api.callApi("/access/check", { rid: training.resourceId }, function (response) {
-        console.log("[GDPA] training access check response:", JSON.stringify(response));
+      window.tp.api.callApi("/access/check", { rid: TRAINING_RESOURCE_ID }, function (response) {
         if (response?.access?.granted || response?.data?.access?.granted) setHasAccess(true);
       });
     }]);
-  }, [training?.resourceId]);
+  }, []);
 
   if (!training) return <Layout><div style={{textAlign:"center",padding:"48px 0"}}><h1>Training Not Found</h1></div></Layout>;
 
@@ -54,7 +54,7 @@ export default function TrainingDetail() {
         <div style={{ marginBottom: 32 }}>
           <div style={{ display: "flex", alignItems: "center", gap: 12, marginBottom: 16 }}>
             <span style={{ fontSize: 12, fontWeight: 600, color: COLORS.primary, textTransform: "uppercase" }}>{training.code}</span>
-            <LockBadge locked={training.locked} />
+            <LockBadge locked={training.locked} hasAccess={training.locked && hasAccess} />
           </div>
           <h1 style={{ fontSize: 42, fontWeight: 700, color: COLORS.neutral, marginBottom: 16, lineHeight: 1.2 }}>{training.title}</h1>
           <div style={{ display: "flex", gap: 20, fontSize: 14, color: "#666" }}>

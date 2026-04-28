@@ -28,7 +28,7 @@ export const CERTIFICATIONS = [
     level: "Professional",
     duration: "3 months",
     description: "The CIPP/A exam certifies your knowledge of privacy laws and practices across the Asia-Pacific region.",
-    locked: false
+    locked: true
   },
   {
     id: 4,
@@ -86,7 +86,7 @@ export const TRAINING = [
     date: "Apr 15, 2026",
     seats: 200,
     duration: "60 min",
-    locked: false
+    locked: true
   },
 ];
 

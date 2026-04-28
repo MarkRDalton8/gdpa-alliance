@@ -98,7 +98,7 @@ export default function CertificationDetail() {
                 padding: "14px 32px", borderRadius: 6, fontWeight: 700,
                 fontSize: 16, cursor: "pointer", fontFamily: "'Lato', sans-serif",
               }}>
-              {cert.offerId ? "Enroll Now" : "View Full Curriculum & Enroll"}
+              Enroll Now
             </button>
           )}
         </div>

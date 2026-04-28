@@ -108,7 +108,7 @@ export default function TrainingDetail() {
                 padding: "14px 32px", borderRadius: 6, fontWeight: 700,
                 fontSize: 16, cursor: "pointer", fontFamily: "'Lato', sans-serif",
               }}>
-              {training.offerId ? "Register Now" : "Register for Session"}
+              Enroll Now
             </button>
           )}
         </div>
